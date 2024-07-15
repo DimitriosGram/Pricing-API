@@ -34,7 +34,7 @@ def test_create_dataframe():
 @mock.patch('boto3.client')
 def test_product_specification(mock_boto3_client):
     
-    mock_s3_response = {"CPPricer/parquetfiles/product_specifications.csv": BytesIO(
+    mock_s3_response = {"Price/parquet/specifications.csv": BytesIO(
         b'Idx,Supported,Parameters,Pricing_Methods\n'
         b'Product1,1,"[""param1"", ""param2""]","[""method1"", ""method2""]"\n'
         b'Product2,0,[],[]\n'
@@ -61,11 +61,11 @@ def test_product_specification(mock_boto3_client):
 def test_open_pricingband_model(mock_boto3_client):
     # Create mock S3 responses for the files as encoded bytes
     mock_s3_responses = {
-        "CPPricer/parquetfiles/finance.csv": "Name,Age\nJohn,30\nAlice,25\nBob,35".encode(),
-        "CPPricer/parquetfiles/fundingcurve.csv": "Curve,Rate\nA,0.05\nB,0.03\nC,0.04".encode(),
-        "CPPricer/parquetfiles/sizepremia.csv": "Size,Premia\nSmall,0.02\nMedium,0.03\nLarge,0.04".encode(),
-        "CPPricer/parquetfiles/termpremia.csv": "Term,Premia\nShort,0.01\nMedium,0.02\nLong,0.03".encode(),
-        "CPPricer/parquetfiles/credit_premia.csv": "Credit,Premia\nGood,0.01\nAverage,0.02\nBad,0.03".encode(),
+        "Pricer/parquet/finance.csv": "Name,Age\nJohn,30\nAlice,25\nBob,35".encode(),
+        "Pricer/parquet/fundingcurve.csv": "Curve,Rate\nA,0.05\nB,0.03\nC,0.04".encode(),
+        "Pricer/parquet/sizepremia.csv": "Size,Premia\nSmall,0.02\nMedium,0.03\nLarge,0.04".encode(),
+        "Pricer/parquet/termpremia.csv": "Term,Premia\nShort,0.01\nMedium,0.02\nLong,0.03".encode(),
+        "Pricer/parquet/credit_premia.csv": "Credit,Premia\nGood,0.01\nAverage,0.02\nBad,0.03".encode(),
     }
     
     # Create a mock S3 client and its get_object method
@@ -92,7 +92,7 @@ def test_open_pricingband_model(mock_boto3_client):
 def test_open_pricingband_market(mock_boto3_client):
     # Create mock S3 responses for the files as encoded bytes
     mock_s3_responses = {
-        "CPPricer/parquetfiles/term_risk_discount.csv": "Name,Age\nJohn,30\nAlice,25\nBob,35".encode()
+        "Pricer/parquet/term_risk_discount.csv": "Name,Age\nJohn,30\nAlice,25\nBob,35".encode()
     }
     
     # Create a mock S3 client and its get_object method
@@ -115,7 +115,7 @@ def test_open_pricingband_market(mock_boto3_client):
 def test_open_pricingband_market_simple(mock_boto3_client):
     # Create mock S3 responses for the files as encoded bytes
     mock_s3_responses = {
-        "CPPricer/parquetfiles/market_simple_table.csv": "Name,Age\nJohn,30\nAlice,25\nBob,35".encode()
+        "Pricer/parquet/market_simple_table.csv": "Name,Age\nJohn,30\nAlice,25\nBob,35".encode()
     }
     
     # Create a mock S3 client and its get_object method
@@ -139,11 +139,11 @@ def test_pricing_calc_model(mock_boto3_client):
 
     # Mock S3 response for open_pricingband_model
     mock_s3_responses = {
-        "CPPricer/parquetfiles/finance.csv": "Idx,NIM\nproduct1,0.05".encode(),
-        "CPPricer/parquetfiles/fundingcurve.csv": "Time(in months),product1\n30, 0.02".encode(),
-        "CPPricer/parquetfiles/sizepremia.csv": "Size(in thousands),product1\n100, 0.01".encode(),
-        "CPPricer/parquetfiles/termpremia.csv": "Time(in months),product1\n30, 0.015".encode(),
-        "CPPricer/parquetfiles/credit_premia.csv": "Product,DimOneValMin,DimOneValMax,DimTwoVal,Value\nproduct1, 10, 50,Good, 0.025".encode()
+        "Pricer/parquetf/finance.csv": "Idx,NIM\nproduct1,0.05".encode(),
+        "Pricer/parquet/fundingcurve.csv": "Time(in months),product1\n30, 0.02".encode(),
+        "Pricer/parquet/sizepremia.csv": "Size(in thousands),product1\n100, 0.01".encode(),
+        "Pricer/parquet/termpremia.csv": "Time(in months),product1\n30, 0.015".encode(),
+        "Pricer/parquet/credit_premia.csv": "Product,DimOneValMin,DimOneValMax,DimTwoVal,Value\nproduct1, 10, 50,Good, 0.025".encode()
     }
     
 
@@ -173,7 +173,7 @@ def test_pricing_calc_market(mock_boto3_client):
 
     # Mock S3 response for open_pricingband_model
     mock_s3_responses = {
-        "CPPricer/parquetfiles/term_risk_discount.csv": "Term,Strong,Good,Satisfactory,Weak\n30,0,500,0,0".encode(),
+        "Pricer/parquet/term_risk_discount.csv": "Term,Strong,Good,Satisfactory,Weak\n30,0,500,0,0".encode(),
     }
     
 
@@ -202,7 +202,7 @@ def test_pricing_calc_market_simple(mock_boto3_client):
 
     # Mock S3 response for open_pricingband_model
     mock_s3_responses = {
-        "CPPricer/parquetfiles/market_simple_table.csv": "DimOneValMin,DimOneValMax,DimTwoValue,Value\n15,45,5.1,600".encode(),
+        "Pricer/parquet/market_simple_table.csv": "DimOneValMin,DimOneValMax,DimTwoValue,Value\n15,45,5.1,600".encode(),
     }
     
 

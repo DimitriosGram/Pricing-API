@@ -25,11 +25,11 @@ This project was developed to tackle pain points that where highlighted by the b
 
 ## Features
         
-- Products: The API uses a config file s3://rb-rbcore/parquetfiles/product_specification.csv, this file states which products are currently supported by the API and which are not. To support a new product you must fill in the Parameters and the Pricing_methods columns to state which params must be included so that a complete pricing run can be completed for that product and which pricing methods that particular product supports (model, market, market_simple).
+- Products: The API uses a config file s3 path, this file states which products are currently supported by the API and which are not. To support a new product you must fill in the Parameters and the Pricing_methods columns to state which params must be included so that a complete pricing run can be completed for that product and which pricing methods that particular product supports (model, market, market_simple).
 
 - Pricing Types: The API supports three different pricing types, model, market and market_simple, for a given product the pricing method must be specified in the config file so that the API knows which products support wich pricing types. 
 
-- Config File Store: All config files are supported at s3://rb-rbcore/parquetfiles/, the API uses these to know which products are supported, what the params are that are needed for these products, the pricing methods that are supported for these products and certain metrics that are decided on by the business to actually price the products. 
+- Config File Store: All config files are supported at s3 path the API uses these to know which products are supported, what the params are that are needed for these products, the pricing methods that are supported for these products and certain metrics that are decided on by the business to actually price the products. 
 
 - Audit: Each API run audit data is stored in a dynamoDB ("pricing_apirunlog") table at run time, this will include all output data that is produced by the api along with inputdata, date and time of run
 
@@ -38,13 +38,13 @@ This project was developed to tackle pain points that where highlighted by the b
 
 This project includes four components, to fully understand the pipeline you can review these components on the AWS Console
 
-- API Gateway: API ID (f56s9qblli), used to forward request params, envoke lambda function backend and finally show the payload back to the API client.
+- API Gateway: API ID (g3232423), used to forward request params, envoke lambda function backend and finally show the payload back to the API client.
 
-- Lambda Function: PricingAPI-V02, this Lambda function is envoked by the REST API mentioned above. It utilises various different parameteres (depending on the product) to understand which config files need to be open and used to calculate the price that would be offered for that product. 
+- Lambda Function: Lambda-V02, this Lambda function is envoked by the REST API mentioned above. It utilises various different parameteres (depending on the product) to understand which config files need to be open and used to calculate the price that would be offered for that product. 
 
-- dynamoDB Table: pricing_apirunlog, is used to store all audit data associated with the API run, this includes all output, user_id, date and time of invocation. This table should be used for caching logic within applications.
+- dynamoDB Table: dynamo_db, is used to store all audit data associated with the API run, this includes all output, user_id, date and time of invocation. This table should be used for caching logic within applications.
 
-- S3 Bucket: s3://rb-rbcore/parquetfiles/ is used to store all the configuration files that are needed to conduct the calculation and show a final price for a product.
+- S3 Bucket: s3 bucket is used to store all the configuration files that are needed to conduct the calculation and show a final price for a product.
 
 
 ### Prerequisites
@@ -71,16 +71,12 @@ def PricingAPI():
               'user_name': {Your name}}
 
     Response = requests.get(
-        'https://f56s9qblli.execute-api.eu-west-2.amazonaws.com/PricingRestAPI/pricing/', params = params, headers = headers 
+        some link , params = params, headers = headers 
     )
 
     return Response.json()
 ```
 </pre>
-
-Other methods of envoking the API can also be used, for example hitting the URL with params and headers already set as follows https://f56s9qblli.execute-api.eu-west-2.amazonaws.com/PricingRestAPI/pricing/?product=B&amount=3000&term=24&loan_id=edefr4&credit_risk=Strong&pricing_type=model&loan_to_value=45&source_name=ncino&user_name={Your%20Name}
-
-
 
 ## Docker Image
 

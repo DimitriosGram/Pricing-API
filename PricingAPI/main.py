@@ -12,7 +12,7 @@ from typing import Optional
 import ast
 
 load_dotenv()
-AWS_BUCKET = os.environ.get("RB_AWS_S3_BUCKET")
+AWS_BUCKET = os.environ.get("AWS_BUCKET")
 
 
 def create_dataframe(product: str, credit_risk: str, term: str, amount: str, loan_id: str, run_id: str, date: str, price: str, user_name:str, source_name:str, pricing_type : str, loan_to_value: Optional[str] = 'None', de_run_id: Optional[str] = 'None'):

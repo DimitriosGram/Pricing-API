@@ -38,7 +38,7 @@ This project was developed to tackle pain points that where highlighted by the b
 
 This project includes four components, to fully understand the pipeline you can review these components on the AWS Console
 
-- API Gateway: API ID (g3232423), used to forward request params, envoke lambda function backend and finally show the payload back to the API client.
+- API Gateway: API ID (g1111111), used to forward request params, envoke lambda function backend and finally show the payload back to the API client.
 
 - Lambda Function: Lambda-V02, this Lambda function is envoked by the REST API mentioned above. It utilises various different parameteres (depending on the product) to understand which config files need to be open and used to calculate the price that would be offered for that product. 
 

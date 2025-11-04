@@ -86,7 +86,7 @@ Finally CMD ["main.handler"] states which function within the main.py file shoul
 
 ## API Gateway and Lambda Function
 
-![Architecture diagram](./pricingAPI-Architecture.png)
+![Architecture diagram](image.png)
 
 1. API Gateway envokes the Lambda Function and sends all params that where included in the invocation.
 
